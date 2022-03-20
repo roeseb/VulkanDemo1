@@ -17,6 +17,7 @@ namespace ved
         vedWindow &operator=(const vedWindow &) = delete;
 
         bool shouldClose() { return glfwWindowShouldClose(window); };
+        void createWindowSurface(VkInstance instance, VkSurfaceKHR *surface);
 
     private:
         GLFWwindow *window;

@@ -9,11 +9,14 @@
 				"-fdiagnostics-color=always",
 				"-g",
 				"ved_window.cpp",
+				"ved_pipeline.cpp",
+				"ved_device.cpp",
 				"demo.cpp",
 				"main.cpp",
 				"-o",
 				"${fileDirname}/ved.out",
-				"-lglfw"
+				"-lglfw",
+				"-lvulkan"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
