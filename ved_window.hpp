@@ -7,23 +7,24 @@
 namespace ved
 {
 
-    class vedWindow
+    class VedWindow
     {
     public:
-        vedWindow(int w, int h, std::string name);
-        ~vedWindow();
+        VedWindow(int w, int h, std::string name);
+        ~VedWindow();
 
-        vedWindow(const vedWindow &) = delete;
-        vedWindow &operator=(const vedWindow &) = delete;
+        VedWindow(const VedWindow &) = delete;
+        VedWindow &operator=(const VedWindow &) = delete;
 
         bool shouldClose() { return glfwWindowShouldClose(window); };
         void createWindowSurface(VkInstance instance, VkSurfaceKHR *surface);
+        VkExtent2D getExtent() { return {static_cast<uint32_t>(width), static_cast<uint32_t>(height)}; }
 
     private:
         GLFWwindow *window;
 
-        int width;
-        int height;
+        const int width;
+        const int height;
         std::string name;
 
         void init();

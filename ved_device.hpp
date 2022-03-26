@@ -30,7 +30,7 @@ class VedDevice {
   const bool enableValidationLayers = true;
 #endif
 
-  VedDevice(ved::vedWindow &window);
+  VedDevice(ved::VedWindow &window);
   ~VedDevice();
 
   // Not copyable or movable
@@ -94,7 +94,7 @@ class VedDevice {
   VkInstance instance;
   VkDebugUtilsMessengerEXT debugMessenger;
   VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-  ved::vedWindow &window;
+  ved::VedWindow &window;
   VkCommandPool commandPool;
 
   VkDevice device_;

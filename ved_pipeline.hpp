@@ -12,7 +12,7 @@ namespace ved
     {
         VkViewport viewport;
         VkRect2D scissor;
-        VkPipelineViewportStateCreateInfo viewportInfo;
+        
         VkPipelineInputAssemblyStateCreateInfo inputAssemblyInfo;
         VkPipelineRasterizationStateCreateInfo rasterizationInfo;
         VkPipelineMultisampleStateCreateInfo multisampleInfo;
@@ -24,17 +24,19 @@ namespace ved
         uint32_t subpass = 0;
     };
 
-    class vedPipeline
+    class VedPipeline
     {
     public:
-        vedPipeline(VedDevice &device,
+        VedPipeline(VedDevice &device,
                     const std::string &vertexFileName,
                     const std::string &fragFileName,
                     const PipelineConfigInfo &configInfo);
-        ~vedPipeline();
-        vedPipeline(const vedPipeline &) = delete;
-        void operator=(const vedPipeline &) = delete;
+        ~VedPipeline();
+        VedPipeline(const VedPipeline &) = delete;
+        void operator=(const VedPipeline &) = delete;
 
+        void bind(VkCommandBuffer commandBuffer);
+        
         static PipelineConfigInfo defaultPipelineConfigInfo(uint32_t width, uint32_t height);
 
     private:

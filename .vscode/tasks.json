@@ -11,6 +11,7 @@
 				"ved_window.cpp",
 				"ved_pipeline.cpp",
 				"ved_device.cpp",
+				"ved_swap_chain.cpp",
 				"demo.cpp",
 				"main.cpp",
 				"-o",

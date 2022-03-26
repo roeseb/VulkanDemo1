@@ -55,7 +55,7 @@ namespace ved
   }
 
   // class member functions
-  VedDevice::VedDevice(ved::vedWindow &window) : window{window}
+  VedDevice::VedDevice(ved::VedWindow &window) : window{window}
   {
     createInstance();
     setupDebugMessenger();

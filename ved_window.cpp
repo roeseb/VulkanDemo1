@@ -3,16 +3,16 @@
 #include <stdexcept>
 
 namespace ved {
-    vedWindow::vedWindow(int w, int h, std::string myName) : width{w}, height{h}, name{myName} {
+    VedWindow::VedWindow(int w, int h, std::string myName) : width{w}, height{h}, name{myName} {
         init();    
     }
 
-    vedWindow::~vedWindow() {
+    VedWindow::~VedWindow() {
         glfwDestroyWindow(window);
         glfwTerminate();
     }
 
-    void vedWindow::init() {
+    void VedWindow::init() {
         glfwInit();
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
@@ -20,7 +20,7 @@ namespace ved {
         window = glfwCreateWindow(width, height, name.c_str(), nullptr, nullptr);
     }
 
-    void vedWindow::createWindowSurface(VkInstance instance, VkSurfaceKHR *surface) {
+    void VedWindow::createWindowSurface(VkInstance instance, VkSurfaceKHR *surface) {
         if (glfwCreateWindowSurface(instance, window, nullptr, surface) != VK_SUCCESS) {
             throw std::runtime_error("failed to create  window surface");
         }
