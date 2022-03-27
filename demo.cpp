@@ -24,6 +24,8 @@ namespace ved
             glfwPollEvents();
             drawFrame();
         }
+
+        vkDeviceWaitIdle(device.device());
     }
 
     void Demo::createPipelineLayout()
