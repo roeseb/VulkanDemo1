@@ -2,24 +2,46 @@
 #include "ved_window.hpp"
 #include "ved_pipeline.hpp"
 #include "ved_device.hpp"
+#include "ved_swapchain.hpp"
+
+#include <memory>
+#include <stdexcept>
+#include <vector>
+#include <array>
+
+#define DEBUG
 
 namespace ved
 {
-    class Demo
+    namespace Demos
     {
+        class SimpleDemo
+        {
+        public:
+            SimpleDemo();
+            ~SimpleDemo();
+            SimpleDemo(const SimpleDemo&) = delete;
+            SimpleDemo &operator=(const SimpleDemo&) = delete;
 
-    public:
-        void run();
+            void run();
 
-        static constexpr int WIDTH = 800;
-        static constexpr int HEIGHT = 600;
+            static constexpr int WIDTH = 800;
+            static constexpr int HEIGHT = 600;
 
-    private:
-        vedWindow window{800, 600, "Vulkan Demo"};
-        VedDevice device{window};
-        vedPipeline pipeline{device,
-                             "shaders/simple_shader.vert.spv",
-                             "shaders/simple_shader.frag.spv",
-                             vedPipeline::defaultPipelineConfigInfo(WIDTH, HEIGHT)};
-    };
+        private:
+            void createPipelineLayout();
+            void createPipeline();
+            void createCommandBuffers();
+            void drawFrame();
+
+            vedWindow window{800, 600, std::string(appname)};
+            VedDevice device{this->window};
+            vedSwapchain swapchain{device, window.getExtent()};
+            std::unique_ptr<vedPipeline> pipeline;
+            VkPipelineLayout pipelineLayout;
+            std::vector<VkCommandBuffer> commandBuffers;
+
+            static constexpr char* appname = "Easy Vulkan Demo";
+        };
+    }
 }

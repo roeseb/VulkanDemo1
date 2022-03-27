@@ -69,7 +69,9 @@ VedDevice::~VedDevice() {
 }
 
 void VedDevice::createInstance() {
-  if (enableValidationLayers && !checkValidationLayerSupport()) {
+  std::cout << "Enable layers: " << enableValidationLayers << std::endl;
+  // If you need this: checkValidationLayerSupport()
+  if (enableValidationLayers && checkValidationLayerSupport()) {
     throw std::runtime_error("validation layers requested, but not available!");
   }
 
@@ -244,11 +246,12 @@ bool VedDevice::checkValidationLayerSupport() {
 
   std::cout << "Layers: " << std::endl;
 
+  for (const auto &layerProperties : availableLayers) {
+    std::cout << "\t" << layerProperties.layerName << std::endl;
+  }
+
   for (const char *layerName : validationLayers) {
     bool layerFound = false;
-
-    std::cout << "\t" << layerName << std::endl;
-
     for (const auto &layerProperties : availableLayers) {
       if (strcmp(layerName, layerProperties.layerName) == 0) {
         layerFound = true;

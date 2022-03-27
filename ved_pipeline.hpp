@@ -2,14 +2,25 @@
 
 #include <string>
 #include <vector>
+#include <cassert>
 
 #include "ved_device.hpp"
 
 namespace ved
 {
-
     struct PipelineConfigInfo
     {
+        VkViewport viewport;
+        VkRect2D scissor;
+        VkPipelineInputAssemblyStateCreateInfo inputAssemblyInfo;
+        VkPipelineRasterizationStateCreateInfo rasterizationInfo;
+        VkPipelineMultisampleStateCreateInfo multisampleInfo;
+        VkPipelineColorBlendAttachmentState colorBlendAttachment;
+        VkPipelineColorBlendStateCreateInfo colorBlendInfo;
+        VkPipelineDepthStencilStateCreateInfo depthStencilInfo;
+        VkPipelineLayout pipelineLayout = nullptr;
+        VkRenderPass renderPass = nullptr;
+        uint32_t subpass = 0;
     };
 
     class vedPipeline
@@ -19,10 +30,11 @@ namespace ved
                     const std::string &vertexFileName,
                     const std::string &fragFileName,
                     const PipelineConfigInfo &configInfo);
-        ~vedPipeline(){};
+        ~vedPipeline();
         vedPipeline(const vedPipeline &) = delete;
         void operator=(const vedPipeline &) = delete;
 
+        void bind(VkCommandBuffer cmd);
         static PipelineConfigInfo defaultPipelineConfigInfo(uint32_t width, uint32_t height);
 
     private:

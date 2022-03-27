@@ -6,11 +6,11 @@
 
 int main(int argc, char **argv)
 {
-    ved::Demo demo;
+    ved::Demos::SimpleDemo *demo = new ved::Demos::SimpleDemo();
 
     try
     {
-        demo.run();
+        demo->run();
     }
     catch (const std::exception &e)
     {

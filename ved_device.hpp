@@ -24,10 +24,10 @@ struct QueueFamilyIndices {
 
 class VedDevice {
  public:
-#ifdef NDEBUG
-  const bool enableValidationLayers = false;
-#else
+#ifdef DEBUG
   const bool enableValidationLayers = true;
+#else
+  const bool enableValidationLayers = false;
 #endif
 
   VedDevice(ved::vedWindow &window);
@@ -101,7 +101,7 @@ class VedDevice {
   VkQueue graphicsQueue_;
   VkQueue presentQueue_;
 
-  const std::vector<const char *> validationLayers = {/*"VK_LAYER_KHRONOS_validation",*/ "VK_KHR_DYNAMIC_RENDERING_EXTENSION_NAME"};
+  const std::vector<const char *> validationLayers = { "VK_LAYER_KHRONOS_validation" };
   const std::vector<const char *> deviceExtensions = {VK_KHR_SWAPCHAIN_EXTENSION_NAME};
 };
 
