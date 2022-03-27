@@ -54,7 +54,10 @@ namespace ved
         auto vertCode = readFile(vertexFilePath);
         auto fragCode = readFile(fragFilePath);
 
+        std::cout << "Creating vertShaderModule with " << vertCode.size() << " bytes " << std::endl;
         createShaderModule(vertCode, &vertShaderModule);
+
+        std::cout << "Creating fragShaderModule with " << fragCode.size() << " bytes " << std::endl;
         createShaderModule(fragCode, &fragShaderModule);
 
         VkPipelineShaderStageCreateInfo shaderStages[2];

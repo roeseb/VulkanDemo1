@@ -30,7 +30,7 @@ namespace ved
         void createCommandBuffers();
         void drawFrame();
 
-        VedWindow window{800, 600, "Vulkan Demo"};
+        VedWindow window{WIDTH, HEIGHT, "Vulkan Demo"};
         VedDevice device{window};
         VedSwapChain swapChain{device, window.getExtent()};
         /* VedPipeline pipeline{device,

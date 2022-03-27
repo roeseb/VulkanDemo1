@@ -3,7 +3,7 @@
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 #include <string>
-
+#include <iostream>
 namespace ved
 {
 
@@ -18,7 +18,11 @@ namespace ved
 
         bool shouldClose() { return glfwWindowShouldClose(window); };
         void createWindowSurface(VkInstance instance, VkSurfaceKHR *surface);
-        VkExtent2D getExtent() { return {static_cast<uint32_t>(width), static_cast<uint32_t>(height)}; }
+        VkExtent2D getExtent()
+        {
+            std::cout << "Extent is " << width << "x" << height << std::endl;
+            return {static_cast<uint32_t>(width), static_cast<uint32_t>(height)};
+        }
 
     private:
         GLFWwindow *window;

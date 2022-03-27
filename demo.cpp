@@ -1,5 +1,6 @@
 #include "demo.hpp"
 #include <stdexcept>
+#include <iostream>
 
 namespace ved
 {
@@ -15,11 +16,13 @@ namespace ved
     {
         vkDestroyPipelineLayout(device.device(), pipelineLayout, nullptr);
     }
+    
     void Demo::run()
     {
         while (!window.shouldClose())
         {
             glfwPollEvents();
+            drawFrame();
         }
     }
 
@@ -67,7 +70,7 @@ namespace ved
 
         for (int i = 0; i < commandBuffers.size(); i++)
         {
-            VkCommandBufferBeginInfo beginInfo;
+            VkCommandBufferBeginInfo beginInfo {};
             beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
             if (vkBeginCommandBuffer(commandBuffers[i], &beginInfo) != VK_SUCCESS)
             {
@@ -108,6 +111,12 @@ namespace ved
         if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR)
         {
             throw std::runtime_error("Couldn't acquire next image");
+        }
+        
+        result = swapChain.submitCommandBuffers(&commandBuffers[imageIndex], &imageIndex);
+        if (result != VK_SUCCESS)
+        {
+            throw std::runtime_error("Couldn't submit command buffer to image");
         }
     }
 }
